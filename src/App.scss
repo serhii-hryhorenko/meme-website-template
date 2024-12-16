@@ -1,0 +1,114 @@
+@import "./assets/color-scheme.scss";
+
+body {
+    background: linear-gradient(135deg, $primary, $accent);
+    margin: 16px;
+    height: 100vh;
+}
+
+.logo {
+    z-index: 3;
+    position: absolute;
+    background: transparent;
+    float: left;
+    border-radius: 0 0 40px 0;
+    width: 18vw;
+    box-sizing: border-box;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+}
+
+#main-image-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 65vw;
+    height: 95vh;
+    position: relative;
+
+    .token-info {
+        position: absolute;
+        left: 2vw;
+        bottom: 5vh;
+        z-index: 2;
+    }
+}
+
+#about-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30vw;
+
+    .about-block {
+        height: 72%;
+    }
+}
+
+#social-links {
+    z-index: 4;
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 5.5vw;
+    height: 15vh;
+    max-height: 150px;
+
+    button.follow {
+        font-size: 20px;
+        min-width: 20vw;
+        color: $primary;
+        text-transform: uppercase;
+        border-radius: 80px;
+        background-color: black;
+        border: 2px solid $primary;
+        transition:
+            background-color 0.3s,
+            color 0.3s,
+            transform 0.3s;
+
+        &:hover {
+            background-color: $primary;
+            color: black;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    a.icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        border-radius: 100%;
+        min-width: calc(15vh);
+        color: $primary;
+        background-color: black;
+        transition:
+            background-color 0.3s,
+            transform 0.3s,
+            box-shadow 0.3s;
+
+        svg {
+            fill: $primary;
+            transition: fill 0.3s;
+        }
+
+        &:hover {
+            background-color: $primary;
+            transform: rotate(10deg) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+
+            svg {
+                fill: black;
+            }
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 5px 2px $primary;
+        }
+    }
+}

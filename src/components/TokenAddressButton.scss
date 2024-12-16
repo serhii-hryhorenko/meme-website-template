@@ -1,0 +1,17 @@
+@import "../assets/color-scheme.scss";
+
+rect {
+  fill: $primary;
+}
+
+rect.hovered {
+  fill: white;
+}
+
+path {
+  fill: white;
+}
+
+path.hovered {
+  fill: $primary;
+}
