@@ -7,13 +7,33 @@
   font-stretch: 75% 125%;
 }
 
-html {
-  scroll-behavior: smooth;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border font-mona-sans;
+  }
+
+  html {
+    min-height: 100svh;
+    height: 100%;
+  }
+
+  body {
+    @apply bg-neutral-800 text-white h-full;
+  }
+
+  #root {
+    @apply h-full;
+  }
 }
 
-body {
-  margin: 0;
-  font-family: "Mona Sans";
-  line-height: 1.6;
-  overflow-x: hidden;
+@layer utilities {
+  .safari-blur {
+    -webkit-backdrop-filter: blur(20px);
+    /* Safari-specific */
+    backdrop-filter: blur(20px);
+  }
 }

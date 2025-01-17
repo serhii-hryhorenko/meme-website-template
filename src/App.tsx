@@ -1,58 +1,58 @@
-/// <reference types="vite-plugin-svgr/client" />
+import About from "./components/About";
+import Footer from "./components/Footer";
+import Telegram from "./components/icons/telegram";
+import X from "./components/icons/x";
+import Main from "./components/Main";
 
-import React from "react";
-import "./App.scss";
-import mainImage from "./assets/main.png";
-import logo from "./assets/logo.png";
-import config from "./assets/config.json";
+const App = () => {
+  const text =
+    "Lorem ipsum dolor sit amet consectetur. Purus vel egestas augue nisl. Non cras commodo ultrices nunc scelerisque enim gravida convallis. Ut duis ac faucibus dui sed cras eu dolor. Mauris tristique scelerisque sed consequat varius vitae lorem. Diam consectetur dui nisl quis ultricies et massa.  Nisl sit sit ullamcorper molestie vitae semper pellentesque. Turpis rhoncus nullam posuere facilisi ac risus vitae.";
 
-import TelegramIcon from "/public/telegram.svg?react";
-import XIcon from "/public/x.svg?react";
-import HeroPicture from "./components/HeroPicture";
-import TokenContract from "./components/TokenContract";
-import AboutBlock from "./components/AboutBlock";
+  const images = {
+    logo: "",
+    main: "",
+    about: "",
+  };
 
-const App: React.FC = () => {
+  const links = {
+    followUs: "",
+    x: "",
+    telegram: "",
+  };
+
+  const contractId = "0x9F5d4479b783327b61718fa13B3a0583869a80c1";
+
   return (
-    <>
-      <img className="logo" src={logo} alt="logo" />
-
-      <main>
-        <section id="main-image-block">
-          <HeroPicture imageHref={mainImage} />
-
-          <div className="token-info">
-            <TokenContract address={config.address} />
-          </div>
-        </section>
-
-        <div id="about-column">
-          <AboutBlock text={config.about} />
-
-          <div id="social-links">
-            <button className="follow">Follow Us</button>
-
+    <div className="h-full w-full p-4 2xl:p-10 2xl:pb-7 flex flex-col">
+      <div className="flex-1 relative flex gap-2 h-full">
+        <Main main={images.main} logo={images.logo} contractId={contractId} />
+        <div className="flex flex-col gap-2 pb-5">
+          <About text={text} img={images.about} />
+          <div className="h-36 2xl:h-[172px] flex gap-2 shrink-0 justify-end">
             <a
-              className="icon"
-              href={config.telegram}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={links.followUs}
+              className="flex flex-1 h-full flex-col justify-center items-center shrink-0 [background:#404040] rounded-full text-2xl font-medium leading-[normal] uppercase"
+              // className="z-10 absolute flex -left-[255px] 2xl:-left-[310px] w-[450px] 2xlw-[523px] h-full flex-col justify-center items-center gap-[8.993px] shrink-0 [background:#404040] rounded-full text-2xl font-medium leading-[normal] uppercase"
             >
-              <TelegramIcon width="50" height="50" />
+              Follow us
             </a>
-
             <a
-              className="icon"
-              href={config.twitter}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={links.telegram}
+              className="flex w-36 2xl:w-[172px] flex-col justify-center items-center gap-2 shrink-0 [background:#404040] rounded-full"
             >
-              <XIcon width="50" height="50" />
+              <Telegram />
+            </a>
+            <a
+              href={links.x}
+              className="flex w-36 2xl:w-[172px] flex-col justify-center items-center gap-2 shrink-0 [background:#404040] rounded-full"
+            >
+              <X />
             </a>
           </div>
         </div>
-      </main>
-    </>
+      </div>
+      <Footer />
+    </div>
   );
 };
 

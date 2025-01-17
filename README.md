@@ -1,40 +1,50 @@
-# Memecoin Marketing Website
+# React + TypeScript + Vite
 
-A customizable template website designed specifically for memecoin projects.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Getting Started
+Currently, two official plugins are available:
 
-### Required Assets
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-Before deploying, ensure you have the following assets ready:
+## Expanding the ESLint configuration
 
-pwd src:
-├── assets
-│   ├── about.png
-│   ├── config.json
-│   ├── logo.png
-│   └── main.png
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-`config.json` structure:
-```json
-{
-  "coinName": "ShibaRocket",
-  "slogan": "Fueled by Shibas, Powered to the Stars!",
-  "description": "ShibaRocket combines the love for Shiba Inu with a passion for intergalactic crypto adventures.",
-  "telegram": "https://t.me/shibarocket",
-  "twitter": "https://twitter.com/shibarocket",
-  "about": "ShibaRocket is a community-driven cryptocurrency project inspired by the adventurous spirit of Shiba Inu and the boundless potential of blockchain technology. Our mission is to create an interstellar ecosystem where Shiba enthusiasts can connect, trade, and explore exciting opportunities in the crypto universe.",
-  "address": "0x1234567890abcdef1234567890abcdef12345678",
-  "footerText": "© 2024 ShibaRocket. To the stars and beyond!",
-  "colorScheme": {
-    "primary": "#5dbd73",
-    "accent": "#f2cb05"
-  }
-}
+- Configure the top-level `parserOptions` property like this:
+
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
 
-Place your assets in the appropriate directories as specified in the project structure.
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-## How to use
-1. Copy your assets to src/assets
-2. Run `npm run build`
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
+
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
+```
