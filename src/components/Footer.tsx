@@ -1,8 +1,10 @@
-//TODO: add year 2024-now
-const Footer = () => {
+type Props = {
+  text: string;
+};
+const Footer = ({ text }: Props) => {
   return (
-    <p className="text-base font-normal leading-[normal] text-right">
-      © 2024. All rights reserved.
+    <p className="shrink-0 text-base font-normal leading-[normal] text-right">
+      {text}
     </p>
   );
 };

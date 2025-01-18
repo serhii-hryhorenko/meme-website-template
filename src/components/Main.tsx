@@ -1,6 +1,6 @@
-import logoImg from "../assets/logo-ByfGf1y5.png";
-import mainImg from "../assets/main-BrYlGmJF.png";
-import SendIcon from "./icons/send";
+import { useEffect, useRef, useState } from "react";
+
+import TokenContract from "./TokenContract";
 
 type Props = {
   logo: string;
@@ -9,33 +9,105 @@ type Props = {
 };
 
 const Main = ({ logo, main, contractId }: Props) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
+
+  const isMobile = containerSize.width < 768 - 16 - 16;
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const updateSize = () => {
+        setContainerSize({
+          width: containerRef.current!.offsetWidth,
+          height: containerRef.current!.offsetHeight,
+        });
+      };
+
+      updateSize();
+      window.addEventListener("resize", updateSize);
+
+      return () => {
+        window.removeEventListener("resize", updateSize);
+      };
+    }
+  }, []);
+
+  const clipPath =
+    "M358 100C358 44.7715 402.772 0 458 0H1136C1202.27 0 1256 53.7258 1256 120V876C1256 942.274 1202.27 996 1136 996H120C53.7258 996 0 942.274 0 876V320C0 253.726 53.7258 200 120 200H258C313.228 200 358 155.228 358 100V100Z";
+
   return (
-    <div className="flex-1 h-full flex flex-col justify-between bg-neutral-700 rounded-[120px] relative">
+    <>
       <img
-        src={mainImg}
-        alt="main"
-        className="absolute w-full h-full object-cover rounded-[120px]"
-      />
-      <img
-        src={logoImg}
+        src={logo}
         alt="logo"
-        className="max-w-[350px] h-48 shrink-0 [background:#404040] rounded-[96px] object-cover z-10 border-8 border-solid border-neutral-800 shadow-2xl"
+        className="md:hidden w-full h-48 shrink-0 rounded-[60px] object-cover z-10"
       />
-      <div className="w-[60%] 2xl:h-80 safari-blur border border-solid rounded-[80px] z-10 p-2 ms-10 mb-10 flex flex-col gap-10">
-        <a
-          href=""
-          className="absolute w-36 h-36 flex justify-center items-center gap-2.5 shrink-0 [background:#A6A6A6] rounded-[96px] -top-11 -right-11"
+      <div
+        ref={containerRef}
+        className="w-full min-h-[calc(100vh-24px)] xl:min-h-full flex flex-col justify-end md:justify-between rounded-[120px] relative"
+      >
+        <svg
+          width="100%"
+          height="100%"
+          viewBox={`0 0 ${containerSize.width} ${containerSize.height}`}
+          xmlns="http://www.w3.org/2000/svg"
+          className="absolute w-full h-full object-cover rounded-[60px] xl:rounded-[120px]"
         >
-          <SendIcon />
-        </a>
-        <p className="text-2xl 2xl:text-4xl font-medium leading-[100%] uppercase ms-10 mt-10 2xl:ms-12 2xl:mt-12">
-          Token Contract:
-        </p>
-        <div className="[background:#A6A6A6] rounded-[72px] text-2xl font-medium leading-[normal] break-words p-10">
-          {contractId}
-        </div>
+          <defs>
+            <clipPath id="clipPath">
+              {/* Scale the path dynamically */}
+              <path d={clipPath} />
+            </clipPath>
+
+            {/* Gradient for shimmer effect */}
+            <linearGradient id="shimmerGradient" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0%" stopColor="#f0f0f0" />
+              <stop offset="50%" stopColor="#e0e0e0" />
+              <stop offset="100%" stopColor="#f0f0f0" />
+            </linearGradient>
+          </defs>
+
+          {!isLoaded && (
+            <rect
+              width="100%"
+              height="100%"
+              fill="url(#shimmerGradient)"
+              clipPath="url(#clipPath)"
+            >
+              <animate
+                attributeName="x"
+                from="-100%"
+                to="100%"
+                dur="2s"
+                repeatCount="indefinite"
+              />
+            </rect>
+          )}
+
+          <image
+            href={main}
+            x="0"
+            y="0"
+            width="100%"
+            height="100%"
+            clipPath={isMobile ? undefined : "url(#clipPath)"}
+            preserveAspectRatio="xMidYMid slice"
+            style={{
+              opacity: isLoaded ? 1 : 0,
+              transition: "opacity 0.5s ease-in-out",
+            }}
+            onLoad={() => setIsLoaded(true)}
+          />
+        </svg>
+        <img
+          src={logo}
+          alt="logo"
+          className="hidden md:block max-w-[350px] h-48 shrink-0 rounded-[96px] object-cover z-10"
+        />
+        <TokenContract contractId={contractId} />
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,0 +1,14 @@
+{
+  "coinName": "ShibaRocket",
+  "slogan": "Fueled by Shibas, Powered to the Stars!",
+  "description": "ShibaRocket combines the love for Shiba Inu with a passion for intergalactic crypto adventures.",
+  "telegram": "https://t.me/shibarocket",
+  "twitter": "https://twitter.com/shibarocket",
+  "about": "ShibaRocket is a community-driven cryptocurrency project inspired by the adventurous spirit of Shiba Inu and the boundless potential of blockchain technology. Our mission is to create an interstellar ecosystem where Shiba enthusiasts can connect, trade, and explore exciting opportunities in the crypto universe.",
+  "address": "0x1234567890abcdef1234567890abcdef12345678",
+  "footerText": "© 2024 ShibaRocket. To the stars and beyond!",
+  "colorScheme": {
+    "primary": "#5dbd73",
+    "accent": "#f2cb05"
+  }
+}

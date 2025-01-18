@@ -18,22 +18,33 @@
 
   html {
     min-height: 100svh;
-    height: 100%;
   }
 
   body {
-    @apply bg-neutral-800 text-white h-full;
-  }
-
-  #root {
-    @apply h-full;
+    @apply bg-white blurred-bg text-primary;
+    background-image: url('/src/assets/main.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
   }
 }
 
 @layer utilities {
+  .blurred-bg {
+    backdrop-filter: blur(40px);
+
+    -webkit-backdrop-filter: blur(40px);
+    -moz-backdrop-filter: blur(40px);
+
+    @supports (-webkit-backdrop-filter: blur(40px)) {
+      -webkit-backdrop-filter: blur(40px);
+    }
+  }
+
   .safari-blur {
     -webkit-backdrop-filter: blur(20px);
     /* Safari-specific */
     backdrop-filter: blur(20px);
   }
+
 }
