@@ -10,10 +10,10 @@ Before deploying, ensure you have the following assets ready:
 
 pwd src:
 ├── assets
-│   ├── about.png
-│   ├── config.json
-│   ├── logo.png
-│   └── main.png
+│   ├── about.png
+│   ├── config.json
+│   ├── logo.png
+│   └── main.png
 
 `config.json` structure:
 ```json

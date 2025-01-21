@@ -7,13 +7,44 @@
   font-stretch: 75% 125%;
 }
 
-html {
-  scroll-behavior: smooth;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border font-mona-sans;
+  }
+
+  html {
+    min-height: 100svh;
+  }
+
+  body {
+    @apply bg-white blurred-bg text-primary;
+    background-image: url('/src/assets/main.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
 }
 
-body {
-  margin: 0;
-  font-family: "Mona Sans";
-  line-height: 1.6;
-  overflow-x: hidden;
+@layer utilities {
+  .blurred-bg {
+    backdrop-filter: blur(40px);
+
+    -webkit-backdrop-filter: blur(40px);
+    -moz-backdrop-filter: blur(40px);
+
+    @supports (-webkit-backdrop-filter: blur(40px)) {
+      -webkit-backdrop-filter: blur(40px);
+    }
+  }
+
+  .safari-blur {
+    -webkit-backdrop-filter: blur(20px);
+    /* Safari-specific */
+    backdrop-filter: blur(20px);
+  }
+
 }
